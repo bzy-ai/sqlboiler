@@ -1,5 +1,5 @@
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 {{- $schemaTable := .Table.Name | .SchemaTable}}
 // UpsertG attempts an insert, and does an update or ignore on conflict.
 func (o *{{$tableNameSingular}}) UpsertG({{if eq .DriverName "postgres"}}updateOnConflict bool, conflictColumns []string, {{end}}updateColumns []string,	whitelist ...string) error {

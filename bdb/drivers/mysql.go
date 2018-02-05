@@ -86,7 +86,7 @@ func (m *MySQLDriver) UseTopClause() bool {
 	return false
 }
 
-// TableNames connects to the postgres database and
+// TableNames connects to the mysql database and
 // retrieves all table names from the information_schema where the
 // table schema is public.
 func (m *MySQLDriver) TableNames(schema string, whitelist, blacklist []string) ([]string, error) {
@@ -135,7 +135,7 @@ func (m *MySQLDriver) Columns(schema, tableName string) ([]bdb.Column, error) {
 	select
 	c.column_name,
 	c.column_type,
-	if(c.data_type = 'enum', c.column_type, c.data_type),
+	if(c.data_type = 'enum' or c.data_type = 'set', c.column_type, c.data_type),
 	if(extra = 'auto_increment','auto_increment', c.column_default),
 	c.is_nullable = 'YES',
 		exists (
@@ -166,8 +166,8 @@ func (m *MySQLDriver) Columns(schema, tableName string) ([]bdb.Column, error) {
 
 		column := bdb.Column{
 			Name:       colName,
-			FullDBType: colFullType, // example: tinyint(1) instead of tinyint
-			DBType:     colType,
+			FullDBType: useEnumToFixSet(colFullType), // example: tinyint(1) instead of tinyint
+			DBType:     useEnumToFixSet(colType),
 			Nullable:   nullable,
 			Unique:     unique,
 		}
@@ -391,4 +391,12 @@ func (m *MySQLDriver) LeftQuote() byte {
 // IndexPlaceholders returns false to indicate MySQL doesnt support indexed placeholders
 func (m *MySQLDriver) IndexPlaceholders() bool {
 	return false
+}
+
+func useEnumToFixSet(colType string) string {
+	if strings.HasPrefix(colType, "set(") {
+		return strings.Replace(colType, "set(", "enum(", 1)
+	}
+
+	return colType
 }

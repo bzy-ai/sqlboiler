@@ -1,6 +1,6 @@
 {{- if not .NoHooks -}}
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 var {{$varNameSingular}}BeforeInsertHooks []{{$tableNameSingular}}Hook
 var {{$varNameSingular}}BeforeUpdateHooks []{{$tableNameSingular}}Hook
 var {{$varNameSingular}}BeforeDeleteHooks []{{$tableNameSingular}}Hook

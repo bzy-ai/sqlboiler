@@ -1,6 +1,6 @@
 {{if .Table.IsJoinTable -}}
 {{else -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
 var (
 	{{$varNameSingular}}Columns               = []string{{"{"}}{{.Table.Columns | columnNames | stringMap .StringFuncs.quoteWrap | join ", "}}{{"}"}}

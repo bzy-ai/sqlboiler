@@ -1,5 +1,5 @@
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 {{- $schemaTable := .Table.Name | .SchemaTable}}
 // UpdateG a single {{$tableNameSingular}} record. See Update for
 // whitelist behavior description.

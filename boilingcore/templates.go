@@ -195,6 +195,8 @@ var templateFunctions = template.FuncMap{
 	"titleCase": strmangle.TitleCase,
 	"camelCase": strmangle.CamelCase,
 
+	"replaceReserved": strmangle.ReplaceReservedWords,
+
 	// String Slice ops
 	"join":               func(sep string, slice []string) string { return strings.Join(slice, sep) },
 	"joinSlices":         strmangle.JoinSlices,

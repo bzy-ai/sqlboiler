@@ -1,7 +1,7 @@
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
 {{- $tableNamePlural := .Table.Name | plural | titleCase -}}
 {{- $varNamePlural := .Table.Name | plural | camelCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 func test{{$tableNamePlural}}Bind(t *testing.T) {
 	t.Parallel()
 

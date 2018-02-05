@@ -1,5 +1,5 @@
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 {{- $schemaTable := .Table.Name | .SchemaTable}}
 // DeleteP deletes a single {{$tableNameSingular}} record with an executor.
 // DeleteP will match against the primary key column to find the record to delete.

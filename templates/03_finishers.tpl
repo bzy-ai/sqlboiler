@@ -1,5 +1,5 @@
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 // OneP returns a single {{$varNameSingular}} record from the query, and panics on error.
 func (q {{$varNameSingular}}Query) OneP() (*{{$tableNameSingular}}) {
 	o, err := q.One()

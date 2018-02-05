@@ -1,5 +1,5 @@
 {{- $tableNameSingular := .Table.Name | singular | titleCase -}}
-{{- $varNameSingular := .Table.Name | singular | camelCase -}}
+{{- $varNameSingular := .Table.Name | singular | camelCase | replaceReserved -}}
 {{- $schemaTable := .Table.Name | .SchemaTable}}
 // InsertG a single record. See Insert for whitelist behavior description.
 func (o *{{$tableNameSingular}}) InsertG(whitelist ... string) error {

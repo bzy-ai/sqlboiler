@@ -3,7 +3,7 @@
 	{{- $dot := . -}}
 	{{- $table := .Table -}}
 	{{- range .Table.ToManyRelationships -}}
-		{{- $varNameSingular := .ForeignTable | singular | camelCase -}}
+		{{- $varNameSingular := .ForeignTable | singular | camelCase | replaceReserved -}}
 		{{- $txt := txtsFromToMany $dot.Tables $table . -}}
 		{{- $schemaForeignTable := .ForeignTable | $dot.SchemaTable}}
 // {{$txt.Function.Name}}G retrieves all the {{.ForeignTable | singular}}'s {{$txt.ForeignTable.NameHumanReadable}}
