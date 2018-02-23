@@ -85,6 +85,8 @@ func initViper() error {
 
 	// Ignore errors here, fall back to defaults and validation to provide errs
 	_ = viper.ReadInConfig()
+	replacer := strings.NewReplacer(".", "_")
+    viper.SetEnvKeyReplacer(replacer)
 	viper.AutomaticEnv()
 
 	return nil
