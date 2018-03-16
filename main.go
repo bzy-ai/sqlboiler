@@ -92,10 +92,16 @@ func main() {
 	// hide flags not recommended for use
 	rootCmd.PersistentFlags().MarkHidden("replace")
 
-	viper.SetDefault("postgres.sslmode", "require")
+	viper.SetDefault("postgres.sslmode", "disable") //disable or required
 	viper.SetDefault("postgres.port", "5432")
-	viper.SetDefault("mysql.sslmode", "true")
+	viper.SetDefault("postgres.host", "127.0.0.1")
+	viper.SetDefault("postgres.user", "root")
+	viper.SetDefault("postgres.pass", "root")
+	viper.SetDefault("mysql.sslmode", "false")
+	viper.SetDefault("mysql.host", "127.0.0.1")
 	viper.SetDefault("mysql.port", "3306")
+	viper.SetDefault("mysql.user", "root")
+	viper.SetDefault("mysql.pass", "root")
 	viper.SetDefault("mssql.sslmode", "true")
 	viper.SetDefault("mssql.port", "1433")
 

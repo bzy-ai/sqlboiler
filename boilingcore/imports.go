@@ -218,6 +218,7 @@ func newImporter() importer {
 				`"path/filepath"`,
 				`"testing"`,
 				`"time"`,
+				`"strings"`,
 			},
 			thirdParty: importList{
 				`"github.com/kat-co/vala"`,

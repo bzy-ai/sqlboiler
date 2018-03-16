@@ -95,17 +95,37 @@ func initViper() error {
 // setConfigDefaults is only necessary because of bugs in viper, noted in main
 func setConfigDefaults() {
 	if viper.GetString("postgres.sslmode") == "" {
-		viper.Set("postgres.sslmode", "require")
+		viper.Set("postgres.sslmode", "disable")
 	}
 	if viper.GetInt("postgres.port") == 0 {
 		viper.Set("postgres.port", 5432)
 	}
+	if viper.GetInt("postgres.host") == 0 {
+		viper.Set("postgres.host", "127.0.0.1")
+	}
+	if viper.GetInt("postgres.user") == 0 {
+		viper.Set("postgres.user", "root")
+	}
+	if viper.GetInt("postgres.pass") == 0 {
+		viper.Set("postgres.pass", "root")
+	}
+
 	if viper.GetString("mysql.sslmode") == "" {
-		viper.Set("mysql.sslmode", "true")
+		viper.Set("mysql.sslmode", "false")
 	}
 	if viper.GetInt("mysql.port") == 0 {
 		viper.Set("mysql.port", 3306)
 	}
+	if viper.GetInt("mysql.host") == 0 {
+		viper.Set("mysql.host", "127.0.0.1")
+	}
+	if viper.GetInt("mysql.user") == 0 {
+		viper.Set("mysql.user", "root")
+	}
+	if viper.GetInt("mysql.pass") == 0 {
+		viper.Set("mysql.pass", "root")
+	}
+
 	if viper.GetString("mssql.sslmode") == "" {
 		viper.Set("mssql.sslmode", "true")
 	}
